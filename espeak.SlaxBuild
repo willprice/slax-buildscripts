@@ -177,6 +177,7 @@ unzip "${SLAX_BUNDLE_NAME}-${SLAX_BUNDLE_VERSION}-source.zip"
 cd "${SLAX_BUNDLE_NAME}-${SLAX_BUNDLE_VERSION}-source/src"
 cp --force portaudio19.h portaudio.h
 sed -i "s:PREFIX=/usr:PREFIX=${SLAX_BUNDLE_TARGET}/usr:g" Makefile
+sed -i "s:DATADIR=/usr/share/espeak-data:DATADIR=${SLAX_BUNDLE_TARGET}/usr/share/espeak-data:g" Makefile
 
 make 
 make install

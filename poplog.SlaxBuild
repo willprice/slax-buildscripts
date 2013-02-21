@@ -57,10 +57,23 @@ mkdir -p "${SLAX_BUNDLE_TARGET}/usr/bin" "${SLAX_BUNDLE_TARGET}/usr/share/man/ma
 ln -s "/usr/share/poplog/current-poplog/bin/poplog.sh" "${SLAX_BUNDLE_TARGET}/usr/bin/poplog"
 ln -s "/usr/share/poplog/current-poplog/man/man1/*" "${SLAX_BUNDLE_TARGET}/usr/share/man/man1"
 
-# Finally add the menu entries
-cd "${SLAX_BUNDLE_TARGET}"
 mkdir -p usr/share/applications/
 mkdir -p root/Poplog
+
+cd "${SLAX_BUNDLE_TARGET}"
+# Add regenerate script
+cat > usr/share/poplog/current-poplog/pop/com/regenerate << EOF
+mkstartup
+mkxved
+mkclisp
+mkplog
+mkpml
+mkeliza
+mkeliza-speak
+mkgblocks
+EOF
+
+# Finally add the menu entries
 cat > usr/share/applications/pop11.desktop << EOF
 [Desktop Entry]
 Exec=poplog pop11
@@ -84,8 +97,8 @@ EOF
 cat > usr/share/applications/ved.desktop << EOF
 [Desktop Entry]
 Exec=cd /root/Poplog && poplog ved
-Name=Poplog Pop11
-GenericName=Programming Language
+Name=Poplog Ved
+GenericName=Text Editor: Ved
 Type=Application
 Terminal=true
 Categories=Development;
